@@ -62,6 +62,10 @@
           <li><a href="page/blog.html" data-lang="nav_blog">Blog</a></li>
           <li><a href="page/contact.html" data-lang="nav_contact">Contact</a></li>
 
+          <button id="theme-toggle" class="theme-toggle">
+            <i class="fas fa-moon"></i>
+          </button>
+
           <!--LANG BUTTON-->
           <li class="lang-dropdown">
             <button id="langBtn" class="lang-btn" data-lang="nav_lang_english">English</button>
@@ -70,7 +74,6 @@
               <li data-lang-option="ar" data-lang="nav_lang_arabic">عربي</li>
             </ul>
           </li>
-
         </ul>
 
         <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
@@ -88,6 +91,10 @@
         <li><a href="#projects" data-lang="nav_projects">Projects</a></li>
         <li><a href="page/blog.html" data-lang="nav_blog">Blog</a></li>
         <li><a href="page/contact.html" data-lang="nav_contact">Contact</a></li>
+
+        <button style="margin-bottom: 20px;" id="theme-toggle" class="theme-toggle">
+          <i class="fas fa-moon"></i>
+        </button>
 
         <!--LANG BUTTON-->
         <li class="lang-dropdown mobile-lang">
@@ -137,7 +144,13 @@
               </a>
             </div>
 
-            <div class="logo-placeholder"><a href="https://x.com/yourpage" target="_blank" aria-label="Twitter/X"
+            <div class="logo-placeholder"><a href="https://tiktok.com/yourpage" target="_blank" aria-label="tiktok"
+                class="social-icon">
+                <i class="fab fa-tiktok"></i>
+              </a>
+            </div>
+
+            <div class="logo-placeholder"><a href="https://linkedin.com/yourpage" target="_blank" aria-label="linkedin"
                 class="social-icon">
                 <i class="fab fa-linkedin-in"></i>
               </a>
@@ -149,7 +162,7 @@
 
       <div class="hero-right reveal">
         <div class="mockup">
-          <img src="img/hero.png" alt="AI mockup">
+          <img src="img/markt-hero.png" alt="AI mockup">
         </div>
       </div>
     </div>
@@ -232,16 +245,17 @@
             <i class="fas fa-bullhorn"></i>
           </div>
           <h3 data-lang="service_digital_main_title">Digital Marketing</h3>
-          <p data-lang="service_digital_main_desc">Smart marketing strategies to help you reach customers and grow online with measurable results.</p>
+          <p data-lang="service_digital_main_desc">Smart marketing strategies to help you reach customers and grow
+            online with measurable results.</p>
           <div class="service-features">
             <span data-lang="service_digital_feat1">Social Media Marketing</span>
             <span data-lang="service_digital_feat2">Google Ads & PPC</span>
             <span data-lang="service_digital_feat3">SEO Optimization</span>
             <span data-lang="service_digital_feat4">Email Marketing</span>
             <span data-lang="service_digital_feat5">Content Creation</span>
-            <span data-lang="service_digital_feat6">Marketing Analytics</span>
           </div>
-          <a href="page/marketing.html" class="btn btn-primary" data-lang="service_digital_cta">Start Your Campaign 🚀</a>
+          <a href="page/marketing.html" class="btn btn-primary" data-lang="service_digital_cta">Start Your Campaign
+            🚀</a>
         </div>
 
         <!-- Web & App Development -->
@@ -251,7 +265,8 @@
             <i class="fas fa-code"></i>
           </div>
           <h3 data-lang="service_web_main_title">Web & App Development</h3>
-          <p data-lang="service_web_main_desc">Websites and apps designed to impress and convert — because design matters, but performance matters more.</p>
+          <p data-lang="service_web_main_desc">Websites and apps designed to impress and convert — because design
+            matters, but performance matters more.</p>
           <div class="service-features">
             <span data-lang="service_web_feat1">Website Design & Development</span>
             <span data-lang="service_web_feat2">E-commerce Solutions</span>
@@ -259,7 +274,8 @@
             <span data-lang="service_web_feat4">UI/UX Design</span>
             <span data-lang="service_web_feat5">Web Maintenance & Hosting</span>
           </div>
-          <a href="page/development.html" class="btn btn-primary" data-lang="service_web_cta">Book Free Consultation 💻</a>
+          <a href="page/development.html" class="btn btn-primary" data-lang="service_web_cta">Book Free Consultation
+            💻</a>
         </div>
 
         <!-- Business Solutions -->
@@ -269,7 +285,8 @@
             <i class="fas fa-cogs"></i>
           </div>
           <h3 data-lang="service_business_main_title">Business Solutions</h3>
-          <p data-lang="service_business_main_desc">Smart tools to manage and improve your company's performance with ease.</p>
+          <p data-lang="service_business_main_desc">Smart tools to manage and improve your company's performance with
+            ease.</p>
           <div class="service-features">
             <span data-lang="service_business_feat1">CRM Systems</span>
             <span data-lang="service_business_feat2">ERP Systems</span>
@@ -277,8 +294,8 @@
             <span data-lang="service_business_feat4">Data Management</span>
             <span data-lang="service_business_feat5">Technical Consultation</span>
           </div>
-          <a href="page/business.html" class="btn btn-primary"
-            data-lang="service_business_cta">Upgrade Your Systems 🧠</a>
+          <a href="page/business.html" class="btn btn-primary" data-lang="service_business_cta">Upgrade Your Systems
+            🧠</a>
         </div>
 
         <!-- Creative & Branding -->
@@ -288,7 +305,8 @@
             <i class="fas fa-paint-brush"></i>
           </div>
           <h3 data-lang="service_creative_main_title">Creative & Branding</h3>
-          <p data-lang="service_creative_main_desc">From concept to visual identity — we create a brand image that builds trust.</p>
+          <p data-lang="service_creative_main_desc">From concept to visual identity — we create a brand image that
+            builds trust.</p>
           <div class="service-features">
             <span data-lang="service_creative_feat1">Logo Design</span>
             <span data-lang="service_creative_feat2">Visual Identity Design</span>
@@ -473,6 +491,12 @@
     </div>
   </footer>
   <!-- CONTACT / FOOTER -->
+
+  <!-- OVERLAY -->
+  <div id="theme-overlay" class="theme-overlay">
+    <i class="theme-icon fas fa-moon"></i>
+  </div>
+  <!-- OVERLAY -->
 
 
   <script src="js/main.js"></script>

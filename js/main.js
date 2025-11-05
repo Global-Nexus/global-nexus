@@ -1,15 +1,11 @@
-// Dynamic path resolution for working on both localhost and GitHub Pages
 function getPath(filePath) {
   const path = window.location.pathname;
 
-  // 1. If we are inside the '/page/' directory (e.g., /nexus/page/blog.html)
-  // We must go up one level to reach the root, where lang/ and blog.json reside.
+
   if (path.includes('/page/')) {
     return '../' + filePath;
   }
 
-  // 2. If we are in the root directory (e.g., /nexus/index.html)
-  // Files are accessed directly (./lang/ar.json)
   return filePath;
 }
 
@@ -38,10 +34,12 @@ function goToHome() {
 }
 
 // Logo click
+
 const logo = document.getElementById('logo');
 if (logo) logo.addEventListener('click', goToHome);
 
 // Navbar Home links (desktop & mobile)
+
 document.querySelectorAll('.nav-home').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
@@ -50,6 +48,7 @@ document.querySelectorAll('.nav-home').forEach(link => {
 });
 
 // Mobile menu toggle
+
 const menuToggle = document.getElementById('menuToggle');
 const mobileMenu = document.getElementById('mobileMenu');
 
@@ -68,6 +67,7 @@ if (menuToggle && mobileMenu) {
 }
 
 // LANG TRANSLATE
+
 let currentLang = localStorage.getItem("lang");
 const urlParams = new URLSearchParams(window.location.search);
 const langFromUrl = urlParams.get('lang');
@@ -87,6 +87,7 @@ if (!currentLang || (currentLang !== 'en' && currentLang !== 'ar')) {
 }
 
 // LANG USER
+
 async function loadLanguage(lang) {
   try {
     const response = await fetch(getPath(`lang/${lang}.json`));
@@ -112,6 +113,7 @@ async function loadLanguage(lang) {
 }
 
 // UPDATE BUTTON
+
 function updateLangButtons(lang) {
   const label = lang === "ar" ? "عربي" : "English";
   const btn = document.getElementById("langBtn");
@@ -121,6 +123,7 @@ function updateLangButtons(lang) {
 }
 
 // DROPDOWN
+
 function setupLangDropdown(dropdown) {
   const btn = dropdown.querySelector(".lang-btn");
   const menu = dropdown.querySelector(".lang-menu");
@@ -139,17 +142,16 @@ function setupLangDropdown(dropdown) {
       localStorage.setItem("lang", selected);
       dropdown.classList.remove("active");
 
-      // **تعديل بسيط لتحسين التزامن:** تحديث المتغير currentLang مباشرة
-      // للتأكد من استخدام اللغة الجديدة عند النقر على الشعار فوراً
       currentLang = selected;
 
       loadLanguage(selected);
-      fetchAndRenderBlogs(selected); // Keep blog rendering updated
+      fetchAndRenderBlogs(selected);
     });
   });
 }
 
 // CLOSE DROPDOWN
+
 document.addEventListener("click", () => {
   document.querySelectorAll(".lang-dropdown").forEach((d) => d.classList.remove("active"));
 });
@@ -159,8 +161,13 @@ document.querySelectorAll(".lang-dropdown").forEach(setupLangDropdown);
 loadLanguage(currentLang);
 
 // Reveal on scroll using IntersectionObserver
+
 const reveals = document.querySelectorAll('.reveal');
-const obsOptions = { root: null, rootMargin: "0px 0px -15% 0px", threshold: 0.1 };
+const obsOptions = {
+  root: null,
+  rootMargin: "0px 0px -5% 0px",
+  threshold: 0.15
+};
 
 const revealObserver = new IntersectionObserver((entries, obs) => {
   entries.forEach(entry => {
@@ -174,6 +181,7 @@ const revealObserver = new IntersectionObserver((entries, obs) => {
 reveals.forEach(el => revealObserver.observe(el));
 
 // Scroll to top
+
 function scrollToTop() {
   window.scrollTo({
     top: 0,
@@ -182,6 +190,7 @@ function scrollToTop() {
 }
 
 // * BLOG DATA & RENDER
+
 const blogCardsContainer = document.getElementById('blogsGrid');
 const blogDetailSection = document.getElementById('blogDetail');
 
@@ -241,12 +250,17 @@ function renderBlogDetails(blogs, lang) {
 
     blogDetailSection.innerHTML = `
 <div class="blog-detail-card">
-<h2 class="blog-title">${title}</h2>
-<p class="blog-date">${blog.date}</p>
-        <img src="${getPath(blog.image)}" alt="${title}" class="blog-image">
-<p class="blog-content">${content}</p>
-<a href="blog.html" class="btn btn-primary back-btn" data-lang="blog_back">← Back to Blog</a>
-</div>
+    <div class="blog-image-wrapper">
+      <img src="${getPath(blog.image)}" alt="${title}" class="blog-image">
+    </div>
+
+    <div class="blog-content-wrapper">
+      <p class="blog-date">${blog.date}</p>
+      <h2 class="blog-title">${title}</h2>
+      <div class="blog-content">${content}</div>
+      <a href="blog.html" class="back-btn" data-lang="blog_back">← العودة إلى المدونة</a>
+    </div>
+  </div>
 `;
     setTimeout(() => loadLanguage(currentLang), 50);
   } else {
@@ -257,4 +271,62 @@ function renderBlogDetails(blogs, lang) {
 }
 
 // Initial fetch
+
 fetchAndRenderBlogs(currentLang);
+
+// DARK MOOD 
+
+const themeToggles = document.querySelectorAll("#theme-toggle");
+const currentTheme = localStorage.getItem("theme");
+
+function updateThemeUI(isDark, btn) {
+  btn.classList.toggle('active', isDark);
+  btn.setAttribute('aria-pressed', String(!!isDark));
+  btn.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+  btn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+}
+
+if (currentTheme === "dark") {
+  document.body.classList.add("dark-mode");
+}
+
+themeToggles.forEach(btn => {
+  const isDark = document.body.classList.contains('dark-mode');
+  updateThemeUI(isDark, btn);
+  btn.setAttribute('role', 'button');
+});
+
+const overlay = document.getElementById("theme-overlay");
+const icon = overlay.querySelector(".theme-icon");
+
+themeToggles.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const isCurrentlyDark = document.body.classList.contains("dark-mode");
+
+    icon.className = `theme-icon fas ${isCurrentlyDark ? 'fa-sun' : 'fa-moon'}`;
+
+    overlay.classList.add("active");
+
+    setTimeout(() => {
+      document.body.classList.toggle("dark-mode");
+
+      const isDarkNow = document.body.classList.contains("dark-mode");
+      themeToggles.forEach(t => updateThemeUI(isDarkNow, t));
+      localStorage.setItem("theme", isDarkNow ? "dark" : "light");
+    }, 150);
+
+    setTimeout(() => {
+      overlay.classList.remove("active");
+    }, 800);
+  });
+
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      btn.click();
+    }
+  });
+});
+ 
+
+
